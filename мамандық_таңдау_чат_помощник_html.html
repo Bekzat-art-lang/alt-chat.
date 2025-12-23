@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Мамандық таңдау – Чат интерфейс</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(rgba(243,246,251,0.9), rgba(243,246,251,0.9)),
+                  url('https://images.unsplash.com/photo-1523580846011-d3a5bc25702b');
+      background-size: cover;
+      background-position: center;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .chat-container {
+      width: 380px;
+      max-width: 95%;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .chat-header {
+      background: #2563eb;
+      color: white;
+      padding: 16px;
+      text-align: center;
+      font-weight: bold;
+    }
+    .chat-messages {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+    }
+    .message {
+      margin-bottom: 12px;
+      line-height: 1.4;
+      padding: 10px 12px;
+      border-radius: 12px;
+      max-width: 85%;
+    }
+    .bot {
+      background: #eef2ff;
+    }
+    .user {
+      background: #2563eb;
+      color: white;
+      margin-left: auto;
+    }
+    .chat-input {
+      display: flex;
+      border-top: 1px solid #e5e7eb;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+    .chat-input button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 0 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div style="padding:12px;background:#f8fafc;border-bottom:1px solid #e5e7eb;">
+      <b>Мамандықтар / Профессии</b>
+      <ul style="margin:8px 0 0 18px;font-size:13px;">
+        <li>💻 IT / Информационные технологии</li>
+        <li>🏥 Медицина / Медицина</li>
+        <li>📚 Педагогика / Педагогика</li>
+        <li>⚙️ Инженерия / Инженерия</li>
+        <li>📊 Экономика / Экономика</li>
+        <li>🎨 Дизайн / Дизайн</li>
+        <li>⚖️ Құқық / Юриспруденция</li>
+      </ul>
+    </div>
+    <div class="chat-header">
+      🎓 Универ АЛТ – Мамандық таңдау чат-интерфейс
+      <div style="font-size:12px;font-weight:normal;margin-top:6px;">
+        Қандай мамандық қызықты екенін анықтауға арналған көмекші
+      </div>
+    </div>
+    <div class="chat-messages" id="messages">
+      <div class="message bot">
+        Сәлем! 👋<br>
+        Бұл чат Универ <b>АЛТ</b> студенттері мен талапкерлеріне арналған.<br><br>
+        Мұнда сен:<br>
+        • Қандай мамандықтар бар екенін<br>
+        • Қай сала саған қызық екенін<br>
+        • Болашақ мамандығыңды таңдауға көмектесетін сұрақтар қоя аласың.<br><br>
+        Сұрағыңды төменге жаз ✍️
+      </div>
+    </div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Хабарлама жазыңыз..." />
+      <button onclick="sendMessage()">Жіберу</button>
+    </div>
+  </div>
+
+  <script>
+    const messages = document.getElementById('messages');
+
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const userMsg = document.createElement('div');
+      userMsg.className = 'message user';
+      userMsg.innerText = text;
+      messages.appendChild(userMsg);
+
+      input.value = '';
+      messages.scrollTop = messages.scrollHeight;
